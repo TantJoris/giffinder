@@ -14,7 +14,7 @@ $(document).ready(function(){
 function appendImageToBody(srcURL) {
     // write a function that will append an <img> to the body with the
     // URL provided in the parameters
-    $('text-center').append('<img src=' + srcURL + '>');
+    $('.text-center').append('<img src=' + srcURL + '>');
 }
 
 function callGiphyAPIWithSearchTerm(searchTerm) {
@@ -22,7 +22,9 @@ function callGiphyAPIWithSearchTerm(searchTerm) {
       url: "https://api.giphy.com/v1/stickers/search?q=" + searchTerm + "&api_key=dc6zaTOxFJmzC",
       method: "GET",
       success: function(response) {
-           var url = response.data[0].images.original.url;
+          
+           var randomGif = Math.floor((Math.random() * 10) + 1);
+           var url = response.data[randomGif].images.original.url;
            appendImageToBody(url);
       },
     }); 
@@ -32,7 +34,7 @@ function callGiphyAPIWithSearchTerm(searchTerm) {
 $("button").click(function (searchTerm) {
     var searchTerm = $("input").val();
     callGiphyAPIWithSearchTerm(searchTerm);
-    $('#text-center').empty();
+    $('.text-center').empty();
 });
 
     
